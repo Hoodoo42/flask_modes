@@ -37,6 +37,16 @@ def get_paintings():
     else:
         return make_response(json.dumps(results, default=str), 500)    
 
+@app.get('/api/painting')
+def get_artist():
+
+    results = dbh.run_statement('CALL get_artist()')
+
+    if(type(results) == list):
+        return make_response(json.dumps(results, default=str), 200)
+    else:
+        return make_response(json.dumps(results, default=str), 500)
+
 
 if(production_mode == True):
     print("running in Production Mode")
